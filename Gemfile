@@ -5,6 +5,7 @@ gem 'foundation-icons-sass-rails'
 gem 'faraday', '~> 0.9.1'
 #omniauth for linkedin
 gem 'omniauth'
+gem 'omniauth-angellist'
 gem 'omniauth-linkedin-oauth2'
 gem 'octokit'
 #foundation zurb
