@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "gitHired" %></title>
+  <title><%= content_for?(:title) ? yield(:title) : "gitHired" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Quicksand|Lobster|Raleway' rel='stylesheet' type='text/css'>
-  </head>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "vendor/modernizr" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Quicksand|Lobster|Raleway' rel='stylesheet' type='text/css'>
+</head>
 
-  <body>
+<body>
 
-    <div class="welcome">
-      <div class="panel callout">
-        <div class="githired-logo"><%= image_tag("/githired-logo.png") %><%= image_tag("/codercat-for-web.png", width: "100") %></div>
-        <div class="text-center">
-          <div class="github"><h1>Welcome Devs!</h1></div>
-          <h4>gitHired USED to be a personalized resume designed for developers.</h4>
-          <h6>Unfortunately, LinkedIn
+  <div class="welcome">
+    <div class="panel callout">
+      <div class="githired-logo"><%= image_tag("/githired-logo.png") %><%= image_tag("/codercat-for-web.png", width: "100") %></div>
+      <div class="text-center">
+        <div class="github"><h1>Welcome Devs!</h1></div>
+        <h4>gitHired USED to be a personalized resume designed for developers.</h4>
+        <h6>Unfortunately, LinkedIn
           changed their API to be only for "Strategic Partners", and thus, our website is donezo. If we find
           the time, we will try to change the backend to work from the LinkedIn pdf resume, but don't hold your breath as we
           all are looking for jobs.</h6>
           <h6>We pulled your education, skills, and employment history from LinkedIn and
             combine it (in one place) with your Github repositories for a resume that is
             more in line with your talents.</h6>
-          <br>
+            <br>
 
-            <div class="signin"><h4><%= link_to 'Sign in with LinkedIn to get started!', "/auth/linkedin" %></h4></div>
+            <div class="signin"><h4><%= link_to 'Sign in with Angel List to get started!', "/auth/angellist" %></h4></div>
+          </div>
+
+
         </div>
-
-
       </div>
-    </div>
-  </body>
-</html>
+    </body>
+    </html>

@@ -8,7 +8,6 @@ gem 'omniauth'
 gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'angellist_api', '~> 1.1.0'
 gem 'omniauth-angellist', :git => 'https://github.com/wasabit/omniauth-angellist.git'
-gem 'omniauth-linkedin-oauth2'
 gem 'octokit'
 #foundation zurb
 gem 'foundation-rails'
