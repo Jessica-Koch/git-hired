@@ -8,9 +8,9 @@
 
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "vendor/modernizr" %>
-  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Quicksand|Lobster|Raleway' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Quicksand|Lobster|Raleway" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -23,14 +23,16 @@
         <!-- <h4>gitHired USED to be a personalized resume designed for developers.</h4>
         <h6>Unfortunately, LinkedIn
           changed their API to be only for "Strategic Partners", and thus, our website is donezo. If we find
-          the time, we will try to change the backend to work from the LinkedIn pdf resume, but don't hold your breath as we
+          the time, we will try to change the backend to work from the LinkedIn pdf resume, but don"t hold your breath as we
           all are looking for jobs.</h6>
           <h6>We pulled your education, skills, and employment history from LinkedIn and
             combine it (in one place) with your Github repositories for a resume that is
             more in line with your talents.</h6>
             <br>
           -->
-          <div class="signin"><h4><%= link_to 'Sign in with Angel List to get started!', "/auth/angellist" %></h4></div>
+          <div class="signin"><li><h4><%= link_to "AngelList", "/auth/angellist" %></h4></li>
+            
+          </div>
         </div>
 
 

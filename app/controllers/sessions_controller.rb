@@ -4,15 +4,16 @@ require 'net/http'
 class SessionsController < ApplicationController
 
   def create 
+    # auth = request.env['omniauth.auth']
     begin
       @user = User.from_omniauth(request.env['omniauth.auth'])
       session[:user_id] = @user.id
-      flash[:success] = "Welcome, #{@user.name}!"
+      user.update(token: env['omniauth.auth']['credentials']['token'])
       redirect_to user_path(user), :notice => 'Signed in!'
     rescue
       flash[:warning] = "there was an error trying to authenticate you..."
     end
-    redirect_to root_url
+    redirect_to '/'
     # @user = User.find_or_create_from_auth_hash(auth_hash)
     # self.current_user = @user
     # redirect_to '/'
@@ -23,7 +24,7 @@ class SessionsController < ApplicationController
       session.delete(:user_id)
       flash[:success] = 'See you!'
     end
-    redirect_to root_path
+    redirect_to '/'
   end
   protected
 

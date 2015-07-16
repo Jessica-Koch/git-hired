@@ -15,9 +15,9 @@ class User < ActiveRecord::Base
     # find_or_create_by ensures we don't create a user multiple times
     user = find_or_create_by(uid: auth_hash['uid'], provider: auth_hash['provider'])
     user.name = auth_hash['info']['name']
-    user.location = auth_hash['info']['location']
+    user.location = get_social_location_for user.provider, auth_hash['info']['location']
     user.linkedin_url = auth_hash['info']['linkedin_url']
-    user.image = auth_hash['info']['image']
+    user.avatar = auth_hash['info']['avatar']
     user.email = auth_hash['info']['email']
     user.bio = auth_hash['info']['bio']
     user.token = auth_hash['credentials']['token']
@@ -26,7 +26,21 @@ class User < ActiveRecord::Base
   end
 
 
+  private 
 
+  def get_social_location_for(provider, location_hash)
+    case provider
+    when 'angellist'
+      location_hash['name']
+    else
+      location_hash
+    end
+  end
+  
+  def current_employer
+    employments.where(current: true).first
+  end
+end
     # def self.create_with_omniauth(auth, code)
     #   @current = create! do |user|
     #     user.provider = auth["provider"]
@@ -47,7 +61,4 @@ class User < ActiveRecord::Base
     #   return @current
     # end
 
-    def current_employer
-      employments.where(current: true).first
-    end
-  end
+    
