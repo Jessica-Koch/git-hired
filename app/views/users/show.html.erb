@@ -3,42 +3,42 @@
     <div class="row show">
       <div class="medium-4 columns">
         <% if current_user.id == @user.id || current_user.role == "admin" %>
-          <%= link_to 'Delete User', user_path(@user, :type => "user"), method: :delete, data: { confirm: "Are you sure?" } %>
+        <%= link_to 'Delete User', user_path(@user, :type => "user"), method: :delete, data: { confirm: "Are you sure?" } %>
         <% end %>
         <div class="profilepic">
           <%= image_tag(@user.avatar, width: "300") %>
         </div>
         <% if current_user.id == @user.id || current_user.role == "admin"%>
-          <div class="nameedit">
-            <a href="#" data-reveal-id="myModal"><div class="text-center">Edit Name and/or Description</div></a>
-          </div>
+        <div class="nameedit">
+          <a href="#" data-reveal-id="myModal"><div class="text-center">Edit Name and/or Description</div></a>
+        </div>
         <% end %>
         <div class="text-center">
           <div class="nameheader"><h2><%= @user.name %></h2></div>
         </div>
         <div class="text-center">
-          <p><%= @user.description %></p>
+          <p><%= @user.bio %></p>
         </div>
         <div class="text-center">
           <%= link_to image_tag("/linked.png", width: "50"), @user.linkedin_url, target: "_blank" %>
           <%= link_to image_tag("/octocat.png", width: "50"), "http://www.github.com/#{@user.github_id}" %>
-            <% if @user.twitter_username != nil && @user.twitter_username != "" %>
+          <% if @user.twitter_username != nil && @user.twitter_username != "" %>
           <%= link_to image_tag("/twitter.png", width: "50"), "http://www.twitter.com/#{@user.twitter_username}" %>
-            <% end %>
-            <%= mail_to @user.email do %>
+          <% end %>
+          <%= mail_to @user.email do %>
           <%= image_tag("/email.png", width: "50") %>
-            <% end %>
+          <% end %>
         </div>
         <hr>
 
         <% if @user.id == current_user.id || current_user.role == "admin" %>
-          <% if @lf == nil %>
-            <%= render :partial => 'looking_fors/create_form' %>
-          <% else %>
-            <%= render :partial => 'looking_fors/edit_form', locals: {lang: @lf.language, qual: @lf.quality, loc: @lf.location, lf_id: @lf.id, user: @user} %>
-          <% end %>
+        <% if @lf == nil %>
+        <%= render :partial => 'looking_fors/create_form' %>
         <% else %>
-          <%= render 'looking_for_form' %>
+        <%= render :partial => 'looking_fors/edit_form', locals: {lang: @lf.language, qual: @lf.quality, loc: @lf.location, lf_id: @lf.id, user: @user} %>
+        <% end %>
+        <% else %>
+        <%= render 'looking_for_form' %>
         <% end %>
 
 
@@ -67,13 +67,13 @@
 <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
   <h2 id="modalTitle">Edit Name and/or Description</h2>
   <%= form_tag edit_description_path do %>
-    <%= label_tag :name %>
-    <%= text_field_tag :name %>
-    <br>
-    <%= label_tag :description %>
-    <%= text_field_tag :description %>
-    <br>
-    <%= submit_tag "Save Changes", class: "button" %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %>
+  <br>
+  <%= label_tag :description %>
+  <%= text_field_tag :description %>
+  <br>
+  <%= submit_tag "Save Changes", class: "button" %>
   <% end %>
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>

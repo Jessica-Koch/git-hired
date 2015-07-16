@@ -4,16 +4,12 @@ require 'net/http'
 class SessionsController < ApplicationController
 
   def create 
-    # auth = request.env['omniauth.auth']
-    begin
-      @user = User.from_omniauth(request.env['omniauth.auth'])
-      session[:user_id] = @user.id
-      user.update(token: env['omniauth.auth']['credentials']['token'])
-      redirect_to user_path(user), :notice => 'Signed in!'
-    rescue
-      flash[:warning] = "there was an error trying to authenticate you..."
-    end
-    redirect_to '/'
+    auth = request.env['omniauth.auth']
+    @user = User.from_omniauth(request.env['omniauth.auth'])
+    session[:user_id] = @user.id
+    @user.update(token: env['omniauth.auth']['credentials']['token'])
+    redirect_to user_path(@user), :notice => 'Signed in!'
+
     # @user = User.find_or_create_from_auth_hash(auth_hash)
     # self.current_user = @user
     # redirect_to '/'
@@ -26,6 +22,7 @@ class SessionsController < ApplicationController
     end
     redirect_to '/'
   end
+
   protected
 
   def auth_hash
