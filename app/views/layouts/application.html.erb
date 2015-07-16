@@ -30,11 +30,12 @@
      <ul class="right">
        <% if current_user %>
        <% if current_user.role == "employer" %>
+       <li><%= image_tag current_user.image %></li>
        <li><h5><%= link_to(current_user.name, users_path) %></h5></li>
        <% else %>
        <li><h5><%= link_to(current_user.name, user_path(current_user)) %></h5></li>
        <% end %>
-       <li><h5><%= link_to "Sign Out", signout_path %></h5></li>
+       <li><h5><%= link_to "Sign Out", signout_path, method: :delete %></h5></li>
        <% else %>
        <li><h5><%= link_to "Sign In", "/auth/angellist" %></h5></li>
        <% end %>

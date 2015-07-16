@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
       @user = User.from_omniauth(request.env['omniauth.auth'])
       session[:user_id] = @user.id
       flash[:success] = "Welcome, #{@user.name}!"
+      redirect_to user_path(user), :notice => 'Signed in!'
     rescue
       flash[:warning] = "there was an error trying to authenticate you..."
     end
@@ -17,12 +18,13 @@ class SessionsController < ApplicationController
     # redirect_to '/'
   end
 
-  def destroy
-    session[:user_id] = nil
-    redirect_to root_url, :notice => 'Signed out!'
+  def destroy 
+    if current_user
+      session.delete(:user_id)
+      flash[:success] = 'See you!'
+    end
+    redirect_to root_path
   end
-
-
   protected
 
   def auth_hash
@@ -45,4 +47,7 @@ end
 #   end
 # end
 
-
+  # def destroy
+  #   session[:user_id] = nil
+  #   redirect_to root_url, :notice => 'Signed out!'
+  # end

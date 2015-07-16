@@ -29,9 +29,9 @@ Rails.application.routes.draw do
   root 'users#welcome'
 
   get '/auth/:provider/callback', to: 'sessions#create'
+  delete '/signout', to: 'sessions#destroy'
   # match '/auth/linkedin/callback' => 'sessions#create', via: [:get, :post]
-  # match '/oauth/' => 'sessions#create', via: [:get, :post]
   match '/auth/failure', to: redirect('/'), via: [:get, :post]
-  match '/signout' => 'sessions#destroy', as: 'signout', via: [:get, :post]
+  # match '/signout' => 'sessions#destroy', as: 'signout', via: [:get, :post]
 
 end

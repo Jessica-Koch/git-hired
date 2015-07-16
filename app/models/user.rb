@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :educations, dependent: :destroy
 
   def self.from_omniauth(auth_hash)
+    # find_or_create_by ensures we don't create a user multiple times
     user = find_or_create_by(uid: auth_hash['uid'], provider: auth_hash['provider'])
     user.name = auth_hash['info']['name']
     user.location = auth_hash['info']['location']
@@ -19,7 +20,7 @@ class User < ActiveRecord::Base
     user.image = auth_hash['info']['image']
     user.email = auth_hash['info']['email']
     user.bio = auth_hash['info']['bio']
-    user.token = auth_hash['info']['token']
+    user.token = auth_hash['credentials']['token']
     user.save!
     user
   end
