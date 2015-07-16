@@ -1,20 +1,27 @@
 require 'uri'
 require 'net/http'
+
 class SessionsController < ApplicationController
 
-
   def create 
-    @user = User.find_or_create_from_auth_hash(auth_hash)
-    self.current_user = @user
-    redirect_to '/'
+    render text: request.env['omniauth.auth']
+    # @user = User.find_or_create_from_auth_hash(auth_hash)
+    # self.current_user = @user
+    # redirect_to '/'
   end
 
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_url, :notice => 'Signed out!'
+  end
+
+
   protected
+
   def auth_hash
     request.env['omniauth.auth']
   end
-
-
+end
 # def create 
 #   url = URI('https://angel.co/api/oauth/authorize?access_token=be59a26ca2c0b233891742051300f8c4365d2f42e4c58685&client_id=c273a4d8cac8229cee5052131e4f8d4affc52218bd481329&client_secret=a112c835871c836e767a4ea29b5b513301ac47fe60338540&response_type=code')
 
@@ -44,8 +51,4 @@ class SessionsController < ApplicationController
 #   end
 # end
 
-def destroy
-  session[:user_id] = nil
-  redirect_to root_url, :notice => 'Signed out!'
-end
-end
+
