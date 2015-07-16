@@ -1,6 +1,6 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
     # provider :linkedin, ENV['LINKEDIN_API_KEY'], ENV['LINKEDIN_SECRET_KEY'], :scope => 'r_fullprofile r_emailaddress'
-    provider :angellist, "client_id", "client_secret" 
+    provider :angellist, ENV['ANGELLIST_KEY'], ENV['ANGELLIST_SECRET']
   end
 
   OmniAuth.config.on_failure = Proc.new { |env|

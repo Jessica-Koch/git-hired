@@ -4,7 +4,7 @@ gem 'foundation-icons-sass-rails'
 #faraday
 gem 'faraday', '~> 0.9.1'
 #omniauth for linkedin
-gem 'omniauth'
+gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'angellist_api', '~> 1.1.0'
 gem 'omniauth-angellist', :git => 'https://github.com/wasabit/omniauth-angellist.git'
