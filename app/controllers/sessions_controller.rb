@@ -4,7 +4,14 @@ require 'net/http'
 class SessionsController < ApplicationController
 
   def create 
-    render text: request.env['omniauth.auth'].to_yaml
+    begin
+      @user = User.from_omniauth(request.env['omniauth.auth'])
+      session[:user_id] = @user.id
+      flash[:success] = "Welcome, #{@user.name}!"
+    rescue
+      flash[:warning] = "there was an error trying to authenticate you..."
+    end
+    redirect_to root_url
     # @user = User.find_or_create_from_auth_hash(auth_hash)
     # self.current_user = @user
     # redirect_to '/'
@@ -22,19 +29,6 @@ class SessionsController < ApplicationController
     request.env['omniauth.auth']
   end
 end
-# def create 
-#   url = URI('https://angel.co/api/oauth/authorize?access_token=be59a26ca2c0b233891742051300f8c4365d2f42e4c58685&client_id=c273a4d8cac8229cee5052131e4f8d4affc52218bd481329&client_secret=a112c835871c836e767a4ea29b5b513301ac47fe60338540&response_type=code')
-
-#   http = Net::HTTP.new(url.host, url.port)
-#   http.use_ssl = true
-#   http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-#   request = Net::HTTP::Get.new(url)
-
-#   response = http.request(request)
-#   puts response.read_body
-
-# end
 
 # def create
 #   auth = request.env['omniauth.auth']
