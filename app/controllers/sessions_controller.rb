@@ -5,11 +5,14 @@ class SessionsController < ApplicationController
 
   def create 
     auth = request.env['omniauth.auth']
-    @user = User.from_omniauth(request.env['omniauth.auth'])
-    session[:user_id] = @user.id
-    @user.update(token: env['omniauth.auth']['credentials']['token'])
-    redirect_to user_path(@user), :notice => 'Signed in!'
-
+    if User.find_by_uid(auth['uid'])
+      @user = User.from_omniauth(request.env['omniauth.auth'])
+      session[:user_id] = @user.id
+      @user.update(token: env['omniauth.auth']['credentials']['token'])
+      redirect_to user_path(@user), :notice => 'Signed in!'
+    else
+      
+    end
     # @user = User.find_or_create_from_auth_hash(auth_hash)
     # self.current_user = @user
     # redirect_to '/'
